@@ -1,9 +1,11 @@
 <script>
+    import { createEventDispatcher } from "svelte";
     import Progress from './Progress.svelte';
     const totalSeconds = 20;
     $: progression = ((totalSeconds - secondLeft) / totalSeconds) * 100;
     let secondLeft = totalSeconds;
     let isRunning = false;
+    const dispatch = createEventDispatcher();
     function startButton() {
         isRunning = true;
         let interval = setInterval(() => {
@@ -13,6 +15,7 @@
                 clearInterval(interval);
                 isRunning = false;
                 secondLeft = totalSeconds;
+                dispatch("end")
             }
         }, 1000);
     }

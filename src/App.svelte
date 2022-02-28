@@ -1,6 +1,10 @@
 <script>
     import Timmer from './components/Timmer.svelte';
     import HT from './components/HT.svelte'
+    let audio;
+    function timerEnds() {
+        audio.play();
+    }
 </script>
 
 <style>
@@ -10,7 +14,7 @@
 </style>
 
 <h1>Handwashing app</h1>
-<Timmer />
+<Timmer on:end={timerEnds}/>
 <HT />
 
 
@@ -22,3 +26,7 @@
         Sound Source
     </a>
 </h3>
+
+<audio bind:this={audio}>
+    <source src="sound.wav">
+</audio>
